@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,11 +21,20 @@ public class ProductController {
         return store.values();
     }
 
+    @GetMapping("/search")
+    public List<Product> search(@RequestParam String name) {
+        return store.values()
+                .stream()
+                .filter(product ->
+                        product.name().equalsIgnoreCase(name))
+                .toList();
+    }
+
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product create(@Valid @RequestBody Product prod){
-        store.put(prod.id(), prod);
-        return prod;
+    public Product create(@Valid @RequestBody Product product){
+        store.put(product.id(), product);
+        return product;
     }
 
 }
