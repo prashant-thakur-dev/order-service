@@ -22,9 +22,9 @@ public class ProductController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product create(@Valid @RequestBody Product prod){
-        store.put(prod.id(), prod);
-        return prod;
+    public Product create(@Valid @RequestBody Product product){
+        store.put(product.id(), product);
+        return product;
     }
 
 }
