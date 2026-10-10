@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,6 +19,15 @@ public class ProductController {
     @GetMapping("/all")
     public Collection<Product> getAll(){
         return store.values();
+    }
+
+    @GetMapping("/search")
+    public List<Product> search(@RequestParam String name) {
+        return store.values()
+                .stream()
+                .filter(product ->
+                        product.name().equalsIgnoreCase(name))
+                .toList();
     }
 
     @PostMapping("/create")
