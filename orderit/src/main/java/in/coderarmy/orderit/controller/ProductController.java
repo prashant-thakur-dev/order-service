@@ -26,7 +26,7 @@ public class ProductController {
         return store.values()
                 .stream()
                 .filter(product ->
-                        product.name().equalsIgnoreCase(name))
+                        product.name().toLowerCase().contains(name.toLowerCase()))
                 .toList();
     }
 
